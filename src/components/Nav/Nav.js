@@ -27,21 +27,21 @@ class Nav extends Component {
         const whereAmI = this.props.location.pathname
         if ( whereAmI === '/dash') {
             return(
-                <h2>
+                <h3>
                     Dashboard
-                </h2>
+                </h3>
             )
         } else if ( whereAmI === '/profile' ) {
             return(
-                <h2>
+                <h3>
                     Profile
-                </h2>
+                </h3>
             )
         } else if ( whereAmI === '/search' ) {
             return(
-                <h2>
+                <h3>
                     Search
-                </h2>
+                </h3>
             )
         }
     }
@@ -53,7 +53,7 @@ class Nav extends Component {
                 <section>
                     <section className='navbar'>
                         <div className='nav-content'>
-                            <h1>Helo</h1>
+                            <h2>Helo</h2>
                             <Link to='/dash'>
                                 <img src={require("./Navages/home.png")} alt="homepage"/>
                             </Link>
@@ -62,9 +62,7 @@ class Nav extends Component {
                             </Link>
                         </div>
                         <div className='location'>
-                            <h2>
-                                {this.handleLocation()}
-                            </h2>
+                            {this.handleLocation()}
                         </div>
                         <div className='logout-box'>
                             <button className='logout' onClick={this.logoutButton}>
