@@ -73,19 +73,96 @@ body {
 #friends-list {
     width: 60%;
     height: 67vh;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .rec-fri-box {
-    border: solid blue 1px;
-    background: white;
+    width: 25%;
+    margin-right: 56%;
+    position: relative;
+    top: 14px;
+}
+
+h4 {
+    font-weight: 350;
+    font-size: 25px;
 }
 
 .select-box {
-    border: solid green 1px;
-    background: white;
+    width: 18%;
+    display: flex;
+}
+
+.select-box p {
+    font-size: 18px;
+}
+
+#sorted-by {
+    font-weight: 350;
+    position: relative;
+    top: 12px;
+}
+
+.selector {
+    border-radius: 5px;
+    background: linear-gradient(128deg, rgba(64, 61, 57, 0.1), rgba(255, 255, 255, 0.2));
+    font-size: 18px;
+    height: 25px;
+    margin-left: 5px;
+    position: relative;
+    top: 10px;
 }
 
 .friends-grid {
-    border: solid red 1px;
     background: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    position: absolute;
+    bottom: 2%;
+    left: 1%;
+    height: 70%;
+    width: 58%;
+    overflow: scroll;
+}
+
+.friend-card {
+    border-radius: 2px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    width: 46%;
+    height: 25%;
+    display: flex;
+    margin: 5px 10px 5px 15px;
+}
+
+.friend-name {
+    font-weight: 700;
+    font-size: 150%;
+    text-align: left;
+}
+
+#friend-first-name {
+    position: relative;
+    top: 30%;
+}
+
+#friend-last-name {
+    position: relative;
+    right: 19%;
+    top: 50%;
+}
+
+#add-friend {
+   border: none;
+   border-radius: 1px;
+   background-image: radial-gradient(circle at 50% 0, #29299B, #114CBB);
+   color: #ffffff;
+   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2); 
+   height: 40px;
+   width: 25%;
+   position: relative;
+   top: 35%;
+   left: 13%;
 }

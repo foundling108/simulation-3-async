@@ -14,7 +14,7 @@ class Dash extends Component {
                 <section className='dash-content'>
                     <div className='dash-content-box' id='user-info-box'>
                         <div id='user-image'>
-                            <img src="" alt="profile-pic"/>
+                            <img src="https://robohash.org/doloremquesolutaaut.jpg?size=125x123" alt="profile-pic"/>
                         </div>
                         <p className='user-name' >User's</p>
                         <p className='user-name' >Name</p>
@@ -32,7 +32,7 @@ class Dash extends Component {
                             <h4>Recommended Friends</h4>
                         </div>
                         <div className='select-box'>
-                            <p>Sorted by</p>
+                            <p id='sorted-by'>Sorted by</p>
                             <select className='selector'>
                                 <option value="First Name">First Name</option>
                                 <option value="Last Name">Last Name</option>
@@ -47,9 +47,24 @@ class Dash extends Component {
                         </div>
                         <div className='friends-grid'>
                             {/* <p>No recommendations</p> */}
-                            <img src="" alt="friend-pic"/>
-                            <p>Friend's Name</p>
-                            <button>Add Friend</button>
+                            <div className='friend-card'>
+                                <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
+                                <p className='friend-name' id='friend-first-name'>Friend's</p>    
+                                <p className='friend-name' id='friend-last-name'>Name</p>
+                                <button id='add-friend'>Add Friend</button>
+                            </div>
+                            <div className='friend-card'>
+                                <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
+                                <p className='friend-name' id='friend-first-name'>Friend's</p>    
+                                <p className='friend-name' id='friend-last-name'>Name</p>
+                                <button id='add-friend'>Add Friend</button>
+                            </div>
+                            <div className='friend-card'>
+                                <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
+                                <p className='friend-name' id='friend-first-name'>Friend's</p>    
+                                <p className='friend-name' id='friend-last-name'>Name</p>
+                                <button id='add-friend'>Add Friend</button>
+                            </div>
                         </div>
                     </section>
                 </section>
