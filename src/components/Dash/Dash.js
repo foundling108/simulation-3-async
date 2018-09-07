@@ -5,6 +5,12 @@ import './Dash.css';
 class Dash extends Component {
     constructor(props) {
         super(props);
+
+        this.toProfilePage = this.toProfilePage.bind(this);
+    }
+
+    toProfilePage() {
+        this.props.history.push('/profile')
     }
 
 
@@ -14,11 +20,11 @@ class Dash extends Component {
                 <section className='dash-content'>
                     <div className='dash-content-box' id='user-info-box'>
                         <div id='user-image'>
-                            <img src="https://robohash.org/doloremquesolutaaut.jpg?size=125x123" alt="profile-pic"/>
+                            <img src="https://robohash.org/doloremquesolutaaut.jpg?size=125x123" alt="user-pic"/>
                         </div>
                         <p className='user-name' >User's</p>
                         <p className='user-name' >Name</p>
-                        <button id='edit-prof'>Edit Profile</button>
+                        <button onClick={this.toProfilePage} id='edit-prof'>Edit Profile</button>
                     </div>
                     <div className='dash-content-box' id='welcome-text-box'>
                         <p id='welcome-text'>
@@ -34,15 +40,15 @@ class Dash extends Component {
                         <div className='select-box'>
                             <p id='sorted-by'>Sorted by</p>
                             <select className='selector'>
-                                <option value="First Name">First Name</option>
-                                <option value="Last Name">Last Name</option>
-                                <option value="Gender">Gender</option>
-                                <option value="Hair Color">Hair Color</option>
-                                <option value="Eye Color">Eye Color</option>
-                                <option value="Hobby">Hobby</option>
-                                <option value="Birth Day">Birth Day</option>
-                                <option value="Birth Month">Birth Month</option>
-                                <option value="Birth Year">Birth Year</option>
+                                <option value="first_name">First Name</option>
+                                <option value="last_name">Last Name</option>
+                                <option value="gender">Gender</option>
+                                <option value="hair_color">Hair Color</option>
+                                <option value="eye_color">Eye Color</option>
+                                <option value="hobby">Hobby</option>
+                                <option value="birth_day">Birth Day</option>
+                                <option value="birth_month">Birth Month</option>
+                                <option value="birth_year">Birth Year</option>
                             </select>
                         </div>
                         <div className='friends-grid'>
