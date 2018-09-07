@@ -20,9 +20,14 @@
 }
 
 #profile-image {
-    border: solid #29299B 2px;
+    border: solid #29299B 3px;
     height: 100%;
     width: 15%;
+}
+
+#profile-image img {
+    position: relative;
+    top: 3px;
 }
 
 h6 {
@@ -62,4 +67,48 @@ h6 {
 #cancel {
     border: solid 1px #ccc3c3;
     background: radial-gradient( circle at 50% 0, #ffffff, #f1eceb)
+}
+
+#profile-options-card {
+    height: 60vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.prof-selector-box {
+    /* border: solid black 1px; */
+    width: 35%;
+    height: 17%;
+    margin-right: 20px;
+    position: relative;
+    top: 8%;
+    left: 13%;
+}
+
+.profile-input {
+    border: solid #29299B 1px;
+    border-radius: 1px;
+    height: 30px;
+    width: 40%;
+    font-weight: 55;
+    font-size: 18px;
+    padding: 1px 5px 1px 5px;
+}
+
+.prof-p-tags {
+    font-weight: 550;
+    font-size: 15px;
+    position: relative;
+    bottom: 1px;
+    right: 30px;
+}
+
+.prof-selector {
+    border-radius: 5px;
+    background: #f2f2f2;
+    font-size: 18px;
+    font-weight: 550;
+    height: 25px;
+    width: 42%;
 }

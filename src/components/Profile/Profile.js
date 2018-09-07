@@ -22,24 +22,24 @@ class Profile extends Component {
                         <button className='profile-buttons' id='cancel'>Cancel</button>
                     </div>
                     <section className='profile-user-box' id='profile-options-card'>
-                        <div>
-                            <p>First Name</p>
-                            <input type="text"/>
+                        <div className='prof-selector-box'>
+                            <p className='prof-p-tags'>First Name</p>
+                            <input className='profile-input' type="text"/>
                         </div>
-                        <div>
-                            <p>Last Name</p>
-                            <input type="text"/>
+                        <div className='prof-selector-box'>
+                            <p className='prof-p-tags'>Last Name</p>
+                            <input className='profile-input' type="text"/>
                         </div>
-                        <div>
-                            <p>Gender</p>
+                        <div className='prof-selector-box'>
+                            <p className='prof-p-tags'>Gender</p>
                             <select name='gender' className="prof-selector" id="">
                                 <option value="select">select</option>
                                 <option value="gender">Male</option>
                                 <option value="gender">Female</option>
                             </select>
                         </div>
-                        <div>
-                            <p>Hair Color</p>
+                        <div className='prof-selector-box'>
+                            <p className='prof-p-tags'>Hair Color</p>
                             <select name='hair_color' className="prof-selector" id="">
                                 <option value="select">select</option>
                                 <option value="hair_color">Brown</option>
@@ -50,8 +50,8 @@ class Profile extends Component {
                                 <option value="hair_color">Bald</option>
                             </select>
                         </div>
-                        <div>
-                            <p>Eye Color</p>
+                        <div className='prof-selector-box'>
+                            <p className='prof-p-tags'>Eye Color</p>
                             <select name='eye_color' className="prof-selector" id="">
                                 <option value="select">select</option>
                                 <option value="eye_color">Brown</option>
@@ -59,8 +59,8 @@ class Profile extends Component {
                                 <option value="eye_color">Green</option>
                             </select>
                         </div>
-                        <div>
-                            <p>Hobby</p>
+                        <div className='prof-selector-box'>
+                            <p className='prof-p-tags'>Hobby</p>
                             <select name='hobby' className="prof-selector" id="">
                                 <option value="select">select</option>
                                 <option value="hobby">Music</option>
@@ -75,8 +75,8 @@ class Profile extends Component {
                                 <option value="hobby">Other</option>
                             </select>
                         </div>
-                        <div>
-                            <p>Birth Day</p>
+                        <div className='prof-selector-box'>
+                            <p className='prof-p-tags'>Birth Day</p>
                             <select name='birth_day' className="prof-selector" id="">
                                     <option value="select">select</option>
                                     <option value="birth_day">1</option>
@@ -112,8 +112,8 @@ class Profile extends Component {
                                     <option value="birth_day">31</option>
                             </select>
                         </div>
-                        <div>
-                            <p>Birth Month</p>
+                        <div className='prof-selector-box'>
+                            <p className='prof-p-tags'>Birth Month</p>
                             <select name='birth_month' className="prof-selector" id="">
                                 <option value="select">select</option>
                                 <option value="birth_month">January</option>
@@ -129,8 +129,9 @@ class Profile extends Component {
                                 <option value="birth_month">November</option>
                                 <option value="birth_month">December</option>
                             </select>
-                            <div>
-                                <p>Birth Year</p>
+                            </div>
+                            <div className='prof-selector-box'>
+                                <p className='prof-p-tags'>Birth Year</p>
                                 <select name='birth_year' className="prof-selector" id="">
                                     <option value="select">select</option>
                                     <option value="birth_year">2018</option>
@@ -224,7 +225,6 @@ class Profile extends Component {
                                     <option value="birth_year">1930</option>
                                 </select>
                             </div>
-                        </div>
                     </section>
                 </section>
             </section>
