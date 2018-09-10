@@ -29,61 +29,60 @@ class Search extends Component {
                     <button className='search-button' id='reset'>Reset</button>
                 </div>
                 <section className='search-friends-grid'>
-                    {/* <div className='friend-card'>
+                    <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
                         <p className='friend-name' id='friend-first-name'>Friend's</p>    
                         <p className='friend-name' id='friend-last-name'>Name</p>
                         <button id='add-friend'>Add Friend</button>
                     </div>
-                    <div className='friend-card'>
+                    <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
                         <p className='friend-name' id='friend-first-name'>Friend's</p>    
                         <p className='friend-name' id='friend-last-name'>Name</p>
                         <button id='add-friend'>Add Friend</button>
                     </div>
-                    <div className='friend-card'>
+                    <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
                         <p className='friend-name' id='friend-first-name'>Friend's</p>    
                         <p className='friend-name' id='friend-last-name'>Name</p>
                         <button id='add-friend'>Add Friend</button>
                     </div>
-                    <div className='friend-card'>
+                    <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
                         <p className='friend-name' id='friend-first-name'>Friend's</p>    
                         <p className='friend-name' id='friend-last-name'>Name</p>
                         <button id='add-friend'>Add Friend</button>
                     </div>
-                    <div className='friend-card'>
+                    <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
                         <p className='friend-name' id='friend-first-name'>Friend's</p>    
                         <p className='friend-name' id='friend-last-name'>Name</p>
                         <button id='add-friend'>Add Friend</button>
                     </div>
-                    <div className='friend-card'>
+                    <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
                         <p className='friend-name' id='friend-first-name'>Friend's</p>    
                         <p className='friend-name' id='friend-last-name'>Name</p>
                         <button id='add-friend'>Add Friend</button>
                     </div>
-                    <div className='friend-card'>
+                    <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
                         <p className='friend-name' id='friend-first-name'>Friend's</p>    
                         <p className='friend-name' id='friend-last-name'>Name</p>
                         <button id='add-friend'>Add Friend</button>
                     </div>
-                    <div className='friend-card'>
+                    <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
                         <p className='friend-name' id='friend-first-name'>Friend's</p>    
                         <p className='friend-name' id='friend-last-name'>Name</p>
                         <button id='add-friend'>Add Friend</button>
                     </div>
-                    <div className='friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
-                        <button id='add-friend'>Add Friend</button>
-                    </div> */}
                 </section>
+                <div className='page-bar'>
+                    <button className='page-buttons'>1</button>
+                    <button className='page-buttons'>2</button>
+                    <button className='page-buttons'>3</button>
+                </div>
             </section>
         )
     }

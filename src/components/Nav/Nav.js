@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { logout } from './../../dux/reducer';
 
 import './Nav.css';
 
@@ -16,9 +14,8 @@ class Nav extends Component {
     }
 
     logoutButton() {
-        axios.get('/api/auth/logout')
+        axios.post('/api/auth/logout')
         .then( ()=>{
-            this.props.logout()
             this.props.history.push('/');
         })
     }
@@ -80,12 +77,4 @@ class Nav extends Component {
     }
 }
 
-function mapStateToProps(reduxState) {
-    return {
-        logout: reduxState.logout
-    }
-}
-
- 
-
-export default withRouter(connect(mapStateToProps, {logout}) (Nav));
+export default withRouter(Nav);
