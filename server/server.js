@@ -7,6 +7,7 @@ const axios = require('axios');
 
 // Controllers
 const auth_controller = require('./controllers/auth_controller');
+const user_controller = require('./controllers/user_controller')
 
 const app = express();
 
@@ -84,6 +85,8 @@ app.get('/api/logout', auth_controller.logout);
 // Friend controller
 
 // User controller
+app.get('/api/displayUser', user_controller.displayUser);
+
 
 // Recommended controller
 

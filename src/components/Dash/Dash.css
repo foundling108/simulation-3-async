@@ -37,6 +37,10 @@ body {
     width: 35%;
 }
 
+#user-image img {
+    height: 123px;
+}
+
 #edit-prof {
     border: solid 1px #ccc3c3;
     border-radius: 1px;

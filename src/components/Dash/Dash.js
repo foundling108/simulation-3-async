@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 import './Dash.css';
 
@@ -6,7 +7,26 @@ class Dash extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+           userInfo: [],
+           user_image: '',
+           first_name: '',
+           last_name: ''
+        }
+
         this.toProfilePage = this.toProfilePage.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get('/api/displayUser')
+        .then(res => {
+            this.setState({
+                userInfo: res.data,
+                user_image: res.data[0].user_image,
+                first_name: res.data[0].first_name,
+                last_name: res.data[0].last_name
+            })
+        })
     }
 
     toProfilePage() {
@@ -15,15 +35,17 @@ class Dash extends Component {
 
 
     render() {
+
+
         return(
             <section className='dash-page'>
                 <section className='dash-content'>
                     <div className='dash-content-box' id='user-info-box'>
                         <div id='user-image'>
-                            <img src="https://robohash.org/doloremquesolutaaut.jpg?size=125x123" alt="user-pic"/>
+                            <img src={this.state.user_image} alt="user-pic"/>
                         </div>
-                        <p className='user-name' >User's</p>
-                        <p className='user-name' >Name</p>
+                        <p className='user-name' >{this.state.first_name}</p>
+                        <p className='user-name' >{this.state.last_name}</p>
                         <button onClick={this.toProfilePage} id='edit-prof'>Edit Profile</button>
                     </div>
                     <div className='dash-content-box' id='welcome-text-box'>

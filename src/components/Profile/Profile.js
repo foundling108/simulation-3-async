@@ -1,10 +1,30 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 import './Profile.css';
 
 class Profile extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            userInfo: [],
+            user_image: '',
+            first_name: '',
+            last_name: ''
+         }
+    }
+
+    componentDidMount() {
+        axios.get('/api/displayUser')
+        .then(res => {
+            this.setState({
+                userInfo: res.data,
+                user_image: res.data[0].user_image,
+                first_name: res.data[0].first_name,
+                last_name: res.data[0].last_name
+            })
+        })
     }
 
 
@@ -14,10 +34,10 @@ class Profile extends Component {
                 <section className='profile-page'>
                     <div className='profile-user-box' id='profile-user-card'>
                         <div id='profile-image'>
-                            <img src="https://robohash.org/doloremquesolutaaut.jpg?size=125x123" alt="profile-pic"/>
+                            <img src={this.state.user_image} alt="profile-pic"/>
                         </div>
-                        <h6>User's</h6>
-                        <h6 id='profile-last_name' >Name</h6>
+                        <h6>{this.state.first_name}</h6>
+                        <h6 id='profile-last_name' >{this.state.last_name}</h6>
                         <button className='profile-buttons' id='update'>Update</button>
                         <button className='profile-buttons' id='cancel'>Cancel</button>
                     </div>
@@ -33,7 +53,7 @@ class Profile extends Component {
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Gender</p>
                             <select name='gender' className="prof-selector" id="">
-                                <option value="select">select</option>
+                                <option value="select">Select</option>
                                 <option value="gender">Male</option>
                                 <option value="gender">Female</option>
                             </select>
@@ -41,7 +61,7 @@ class Profile extends Component {
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Hair Color</p>
                             <select name='hair_color' className="prof-selector" id="">
-                                <option value="select">select</option>
+                                <option value="select">Select</option>
                                 <option value="hair_color">Brown</option>
                                 <option value="hair_color">Blond</option>
                                 <option value="hair_color">Black</option>
@@ -53,7 +73,7 @@ class Profile extends Component {
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Eye Color</p>
                             <select name='eye_color' className="prof-selector" id="">
-                                <option value="select">select</option>
+                                <option value="select">Select</option>
                                 <option value="eye_color">Brown</option>
                                 <option value="eye_color">Blue</option>
                                 <option value="eye_color">Green</option>
@@ -62,7 +82,7 @@ class Profile extends Component {
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Hobby</p>
                             <select name='hobby' className="prof-selector" id="">
-                                <option value="select">select</option>
+                                <option value="select">Select</option>
                                 <option value="hobby">Music</option>
                                 <option value="hobby">Fishing</option>
                                 <option value="hobby">Gardening</option>
@@ -78,7 +98,7 @@ class Profile extends Component {
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Birth Day</p>
                             <select name='birth_day' className="prof-selector" id="">
-                                    <option value="select">select</option>
+                                    <option value="select">Select</option>
                                     <option value="birth_day">1</option>
                                     <option value="birth_day">2</option>
                                     <option value="birth_day">3</option>
@@ -115,7 +135,7 @@ class Profile extends Component {
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Birth Month</p>
                             <select name='birth_month' className="prof-selector" id="">
-                                <option value="select">select</option>
+                                <option value="select">Select</option>
                                 <option value="birth_month">January</option>
                                 <option value="birth_month">February</option>
                                 <option value="birth_month">March</option>
@@ -133,7 +153,7 @@ class Profile extends Component {
                             <div className='prof-selector-box'>
                                 <p className='prof-p-tags'>Birth Year</p>
                                 <select name='birth_year' className="prof-selector" id="">
-                                    <option value="select">select</option>
+                                    <option value="select">Select</option>
                                     <option value="birth_year">2018</option>
                                     <option value="birth_year">2017</option>
                                     <option value="birth_year">2016</option>
