@@ -11,8 +11,18 @@ class Profile extends Component {
             userInfo: [],
             user_image: '',
             first_name: '',
-            last_name: ''
+            last_name: '',
+            gender: '',
+            hair_color: '',
+            eye_color: '',
+            hobby: '',
+            birth_day: '',
+            birth_month: '',
+            birth_year: ''
          }
+
+         this.updateUser = this.updateUser.bind(this);
+         this.onUpdate = this.onUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -22,9 +32,37 @@ class Profile extends Component {
                 userInfo: res.data,
                 user_image: res.data[0].user_image,
                 first_name: res.data[0].first_name,
-                last_name: res.data[0].last_name
+                last_name: res.data[0].last_name,
+                gender: res.data[0].gender,
+                hair_color: res.data[0].hair_color,
+                eye_color: res.data[0].eye_color,
+                hobby: res.data[0].hobby,
+                birth_day: res.data[0].birth_day,
+                birth_month: res.data[0].birth_month,
+                birth_year: res.data[0].birth_year
             })
+            console.log(res.data[0].gender)
         })
+    }
+
+    updateUser() {
+        const { first_name, last_name, gender, hair_color, eye_color, hobby, birth_day, birth_month, birth_year } = this.state
+        if( birth_day === 'Select' || birth_month === 'Select' || birth_year === 'Select' ) {
+            return alert('Birth fields are required to update profile')
+        }
+
+        let stuff = { first_name, last_name, gender, hair_color, eye_color, hobby, birth_day, birth_month, birth_year }
+        axios.put(`/api/displayProfile`, stuff)
+        .then(updated => {
+
+        })
+
+    }
+
+    onUpdate(e) {
+       this.setState({
+           [e.target.name]: e.target.value
+       }) 
     }
 
 
@@ -44,18 +82,18 @@ class Profile extends Component {
                     <section className='profile-user-box' id='profile-options-card'>
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>First Name</p>
-                            <input className='profile-input' type="text"/>
+                            <input className='profile-input' type="text" value={this.state.first_name}/>
                         </div>
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Last Name</p>
-                            <input className='profile-input' type="text"/>
+                            <input className='profile-input' type="text" value={this.state.last_name}/>
                         </div>
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Gender</p>
-                            <select name='gender' className="prof-selector" id="">
+                            <select name='gender' className="prof-selector" id="" value={this.state.gender} onChange={this.onUpdate}>
                                 <option value="select">Select</option>
-                                <option value="gender">Male</option>
-                                <option value="gender">Female</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
                             </select>
                         </div>
                         <div className='prof-selector-box'>
