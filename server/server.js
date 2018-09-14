@@ -1,13 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const massive = require('massive');
 const session = require('express-session');
-require('dotenv').config();
 const axios = require('axios');
-
-const checkForDevelopment = require('./middleware/checkForDevelopment');
-const checkForSessions = require('./middleware/checkForSessions');
-const checkForAuth = require('./middleware/checkForAuth');
 
 // Controllers
 const auth_controller = require('./controllers/auth_controller');
@@ -20,25 +16,36 @@ let {
     CLIENT_SECRET,
     REACT_APP_DOMAIN,
     CONNECTION_STRING,
-    SESSION_SECRET
+    SESSION_SECRET,
+    ENVIRONMENT
   } = process.env;
 
 app.use(bodyParser.json());
-app.use( session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-  }));
-
-app.use(checkForSessions)
-
-app.use( express.static( `${__dirname}/../build` ) );
 
 massive(CONNECTION_STRING)
 .then( dbInstance => {
     app.set('db', dbInstance)
     console.log("db connected")
 }).catch( err => console.log("Massive", err) );
+
+app.use( session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  }));
+
+app.use((req, res, next) => {
+  if (ENVIRONMENT === 'dev') {
+    req.app.get('db').users.set_data().then(userData => {
+      req.session.user = userData[0]
+      next();
+    })
+  } else {
+    next();
+  }
+})
+
+app.use( express.static( `${__dirname}/../build` ) );
 
 app.get('/auth/callback', async (req, res) => {
     let payload = {
@@ -47,42 +54,33 @@ app.get('/auth/callback', async (req, res) => {
       code: req.query.code,
       grant_type: 'authorization_code',
       redirect_uri: `http://${req.headers.host}/auth/callback`
-    };
-    let responseWithToken = await axios.post(
-      `https://${REACT_APP_DOMAIN}/oauth/token`,
-      payload
-    );
-    let userData = await axios.get(
-      `https://${REACT_APP_DOMAIN}/userinfo?access_token=${
-        responseWithToken.data.access_token
-      }`
-    );
+    }
+    let responseWithToken = await axios.post(`https://${REACT_APP_DOMAIN}/oauth/token`, payload);
+
+    let userData = await axios.get(`https://${REACT_APP_DOMAIN}/userinfo?access_token=${responseWithToken.data.access_token}`);
+
+    let user_robot = (`https://robohash.org/${Math.floor(Math.random() * 999)}`);
+
     const db = req.app.get('db');
-    let { sub, user_image, first_name, last_name, gender } = userData.data;
+    const { sub, given_name, family_name, gender } = userData.data;
+
     let userExists = await db.users.find_user([sub]);
     if (userExists[0]) {
       req.session.user = userExists[0];
-      res.redirect('http://localhost:3000/#/dash');
     } else {
-      db.users.create_user([sub, user_image, first_name, last_name, gender]).then(createdUser => {
-        req.session.user = createdUser[0];
-        res.redirect('http://localhost:3000/#/dash');
-      });
+      let createdUser = await db.users.create_user([sub, user_robot, given_name, family_name, gender]);
+      req.session.user = createdUser[0]
     }
+    res.redirect('http://localhost:3000/#/dash')
   });
   
 // app.use(checkForDevelopment)
 
 // Authorization controller
-app.get('/api/userData', (req, res) => {
-  if (req.session.user) {
-    res.status(200).send(req.session.user);
-  } else {
-    res.status(401).send('Nice try sucka');
-  }
-});
+app.get('/api/getUser', auth_controller.getUser);
 
-  app.post('/api/logout', auth_controller.logout)
+app.get('/api/logout', auth_controller.logout);
+
 // Friend controller
 
 // User controller

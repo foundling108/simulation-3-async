@@ -1,14 +1,14 @@
 module.exports = {
     getUser: (req, res) => {
         if (req.session.user) {
-            res.status(200).send(req.session.user);
+          res.status(200).send(req.session.user);
         } else {
-            res.status(401).send('Nice try sucka');
+          res.status(401).send('You must log in before continuing')
         }
-    },
+      },
 
-    logout: (req, res ) => {
+    logout: (req, res) => {
         req.session.destroy();
-        res.sendStatus(200);
-    }
+        res.redirect('http://localhost:3000/')
+      }
 }
