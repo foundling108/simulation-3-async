@@ -14,7 +14,7 @@ class Nav extends Component {
     }
 
     logoutButton() {
-        axios.post('/api/auth/logout')
+        axios.post('/auth/logout')
         .then( ()=>{
             this.props.history.push('/');
         })

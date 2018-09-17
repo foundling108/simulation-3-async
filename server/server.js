@@ -80,13 +80,13 @@ app.get('/auth/callback', async (req, res) => {
 // Authorization controller
 app.get('/api/getUser', auth_controller.getUser);
 
-app.get('/api/logout', auth_controller.logout);
+app.post('/auth/logout', auth_controller.logout);
 
 // Friend controller
 
 // User controller
 app.get('/api/displayUser', user_controller.displayUser);
-
+app.put('/api/displayProfile/:id', user_controller.displayProfile);
 
 // Recommended controller
 
