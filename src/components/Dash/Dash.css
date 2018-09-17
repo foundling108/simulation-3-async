@@ -104,8 +104,9 @@ h4 {
 
 #sorted-by {
     font-weight: 350;
-    position: relative;
-    top: 12px;
+    position: absolute;
+    top: 24.35%;
+    left: 44.5%;
 }
 
 .selector {
@@ -114,8 +115,9 @@ h4 {
     font-size: 18px;
     height: 25px;
     margin-left: 5px;
-    position: relative;
-    top: 10px;
+    position: absolute;
+    top: 24%;
+    left: 50%;
 }
 
 .friends-grid {
@@ -147,6 +149,11 @@ h4 {
     text-align: left;
 }
 
+/* #friend-pic {
+    width: 100%;
+    height: auto;
+} */
+
 #friend-first-name {
     position: relative;
     top: 30%;
@@ -169,5 +176,11 @@ h4 {
    position: relative;
    top: 35%;
    left: 13%;
+}
+
+#no-rec {
+    position: absolute;
+    top: 5%;
+    left: 41.5%;
 }
 

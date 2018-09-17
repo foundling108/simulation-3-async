@@ -18,12 +18,14 @@ class Profile extends Component {
             hobby: '',
             birth_day: '',
             birth_month: '',
-            birth_year: ''
+            birth_year: '',
+            cardFirst: '',
+            cardLast: ''
          }
 
-        this.componentDidMount = this.componentDidMount.bind(this);
-         this.updateUser = this.updateUser.bind(this);
-         this.onUpdate = this.onUpdate.bind(this);
+        this.showMe = this.showMe.bind(this);
+        this.updateUser = this.updateUser.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
     }
 
     componentDidMount() {
@@ -41,7 +43,31 @@ class Profile extends Component {
                 hobby: res.data[0].hobby,
                 birth_day: res.data[0].birth_day,
                 birth_month: res.data[0].birth_month,
-                birth_year: res.data[0].birth_year
+                birth_year: res.data[0].birth_year,
+                cardFirst: res.data[0].first_name,
+                cardLast: res.data[0].last_name
+            })
+        })
+    }
+
+    showMe() {
+        axios.get('/api/displayUser')
+        .then(res => {
+            this.setState({
+                userInfo: res.data,
+                user_id: res.data[0].user_id,
+                user_image: res.data[0].user_image,
+                first_name: res.data[0].first_name,
+                last_name: res.data[0].last_name,
+                gender: res.data[0].gender,
+                hair_color: res.data[0].hair_color,
+                eye_color: res.data[0].eye_color,
+                hobby: res.data[0].hobby,
+                birth_day: res.data[0].birth_day,
+                birth_month: res.data[0].birth_month,
+                birth_year: res.data[0].birth_year,
+                cardFirst: res.data[0].first_name,
+                cardLast: res.data[0].last_name
             })
         })
     }
@@ -72,19 +98,19 @@ class Profile extends Component {
                         <div id='profile-image'>
                             <img src={this.state.user_image} alt="profile-pic"/>
                         </div>
-                        <h6>{this.state.first_name}</h6>
-                        <h6 id='profile-last_name' >{this.state.last_name}</h6>
+                        <h6>{this.state.cardFirst}</h6>
+                        <h6 id='profile-last_name' >{this.state.cardLast}</h6>
                         <button className='profile-buttons' id='update' onClick={this.updateUser}>Update</button>
-                        <button className='profile-buttons' id='cancel' onClick={this.componentDidMount}>Cancel</button>
+                        <button className='profile-buttons' id='cancel' onClick={this.showMe}>Cancel</button>
                     </div>
                     <section className='profile-user-box' id='profile-options-card'>
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>First Name</p>
-                            <input className='profile-input' type="text" value={this.state.first_name}/>
+                            <input className='profile-input' name="first_name" type="text" value={this.state.first_name} onChange={this.onUpdate}/>
                         </div>
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Last Name</p>
-                            <input className='profile-input' type="text" value={this.state.last_name}/>
+                            <input className='profile-input' name='last_name' type="text" value={this.state.last_name} onChange={this.onUpdate}/>
                         </div>
                         <div className='prof-selector-box'>
                             <p className='prof-p-tags'>Gender</p>

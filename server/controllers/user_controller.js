@@ -22,5 +22,16 @@ module.exports = {
             res.status(500).send({errorMessage: "Could not update user info"})
             console.log(err)
         })
+    },
+
+    mountRec: (req, res) => {
+        const db = req.app.get('db');
+        const { user_id } = req.session.user;
+
+        db.users.get_everybody([ user_id ])
+        .then( everybody => {
+            res.status(200).send(everybody)
+        })
+        .catch(err => console.log(err))
     }
 }

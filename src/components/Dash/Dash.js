@@ -8,13 +8,24 @@ class Dash extends Component {
         super(props);
 
         this.state = {
-           userInfo: [],
-           user_image: '',
-           first_name: '',
-           last_name: ''
+            userInfo: [],
+            user_id: '',
+            user_image: '',
+            first_name: '',
+            last_name: '',
+            gender: '',
+            hair_color: '',
+            eye_color: '',
+            hobby: '',
+            birth_day: '',
+            birth_month: '',
+            birth_year: '',
+            everyBody: [],
+            filter: ''
         }
 
         this.toProfilePage = this.toProfilePage.bind(this);
+
     }
 
     componentDidMount() {
@@ -22,10 +33,25 @@ class Dash extends Component {
         .then(res => {
             this.setState({
                 userInfo: res.data,
+                user_id: res.data[0].user_id,
                 user_image: res.data[0].user_image,
                 first_name: res.data[0].first_name,
-                last_name: res.data[0].last_name
+                last_name: res.data[0].last_name,
+                gender: res.data[0].gender,
+                hair_color: res.data[0].hair_color,
+                eye_color: res.data[0].eye_color,
+                hobby: res.data[0].hobby,
+                birth_day: res.data[0].birth_day,
+                birth_month: res.data[0].birth_month,
+                birth_year: res.data[0].birth_year
             })
+        })
+
+        axios.get('/api/users')
+        .then(res => {
+           this.setState({
+               everyBody: res.data
+           })
         })
     }
 
@@ -33,9 +59,18 @@ class Dash extends Component {
         this.props.history.push('/profile')
     }
 
-
     render() {
 
+        const allUsers = this.state.everyBody.map(el => {
+            return(
+                <div className='friend-card' key={el.id}>
+                    <img src={el.user_image} alt="friend-pic" id='friend-pic'/>
+                    <p className='friend-name' id='friend-first-name'>{el.first_name}</p>    
+                    <p className='friend-name' id='friend-last-name'>{el.last_name}</p>
+                    <button id='add-friend'>Add Friend</button>
+                </div>
+            )
+        })
 
         return(
             <section className='dash-page'>
@@ -62,6 +97,7 @@ class Dash extends Component {
                         <div className='select-box'>
                             <p id='sorted-by'>Sorted by</p>
                             <select className='selector'>
+                                <option value="select">Select</option>
                                 <option value="first_name">First Name</option>
                                 <option value="last_name">Last Name</option>
                                 <option value="gender">Gender</option>
@@ -74,25 +110,7 @@ class Dash extends Component {
                             </select>
                         </div>
                         <div className='friends-grid'>
-                            {/* <p>No recommendations</p> */}
-                            <div className='friend-card'>
-                                <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                                <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                                <p className='friend-name' id='friend-last-name'>Name</p>
-                                <button id='add-friend'>Add Friend</button>
-                            </div>
-                            <div className='friend-card'>
-                                <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                                <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                                <p className='friend-name' id='friend-last-name'>Name</p>
-                                <button id='add-friend'>Add Friend</button>
-                            </div>
-                            <div className='friend-card'>
-                                <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                                <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                                <p className='friend-name' id='friend-last-name'>Name</p>
-                                <button id='add-friend'>Add Friend</button>
-                            </div>
+                            {this.state.everyBody.length === 0 ? <p id="no-rec">No recommendations</p> :allUsers}
                         </div>
                     </section>
                 </section>
