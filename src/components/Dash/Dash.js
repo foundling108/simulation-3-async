@@ -24,8 +24,9 @@ class Dash extends Component {
             filter: ''
         }
 
+        this.resetDisplay = this.resetDisplay.bind(this);
         this.toProfilePage = this.toProfilePage.bind(this);
-
+        this.addButton = this.addButton.bind(this);
     }
 
     componentDidMount() {
@@ -45,8 +46,17 @@ class Dash extends Component {
                 birth_month: res.data[0].birth_month,
                 birth_year: res.data[0].birth_year
             })
+    
+            axios.get('/api/users')
+            .then(res => {
+               this.setState({
+                   everyBody: res.data
+               })
+            })
         })
+    }
 
+    resetDisplay() {
         axios.get('/api/users')
         .then(res => {
            this.setState({
@@ -59,17 +69,27 @@ class Dash extends Component {
         this.props.history.push('/profile')
     }
 
+    addButton(x) {
+        axios.post('/api/addFriend', {user_id: x})
+        .then(res => {
+            this.setState({
+                everyBody: res.data
+            })
+            this.resetDisplay()
+        })
+    }
+
     render() {
 
-        const allUsers = this.state.everyBody.map(el => {
+        const allUsers = this.state.everyBody.map((el, i) => {
             return(
-                <div className='friend-card' key={el.id}>
+                <div className='friend-card' key={el + i}>
                     <img src={el.user_image} alt="friend-pic" id='friend-pic'/>
                     <div className='friend-name' >
                         <p id='friend-first-name'>{el.first_name}</p>    
                         <p id='friend-last-name'>{el.last_name}</p>
                     </div>
-                    <button id='add-friend'>Add Friend</button>
+                    <button id='add-friend'onClick={() => {this.addButton(el.user_id)}}>Add Friend</button>
                 </div>
             )
         })

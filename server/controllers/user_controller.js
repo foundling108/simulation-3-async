@@ -33,5 +33,17 @@ module.exports = {
             res.status(200).send(everybody)
         })
         .catch(err => console.log(err))
+    },
+
+    addFriend: (req, res) => {
+        const db = req.app.get('db');
+        const { user_id } = req.session.user;
+        console.log(req.body)
+
+        db.friends.add_friend([user_id, req.body.user_id])
+        .then(added => {
+            res.status(200).send(added)
+        })
+        .catch(err => console.log(err))
     }
 }

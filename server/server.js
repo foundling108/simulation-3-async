@@ -90,6 +90,6 @@ app.put('/api/displayProfile/:id', user_controller.displayProfile);
 
 // Recommended controller
 app.get('/api/users', user_controller.mountRec);
-
+app.post('/api/addFriend', user_controller.addFriend);
 
 app.listen( SERVER_PORT, () => { console.log(`Listening on port ${SERVER_PORT}.`); } )
