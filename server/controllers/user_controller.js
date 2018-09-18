@@ -1,9 +1,9 @@
 module.exports = {
     displayUser: (req, res) => {
        const db = req.app.get('db');
-       let info = req.session.user.user_id
+       const { user_id } = req.session.user;
        
-       db.users.get_user([info])
+       db.users.get_user([ user_id ])
        .then(userInfo => {
            res.status(200).send(userInfo)
        })

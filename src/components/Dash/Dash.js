@@ -21,12 +21,14 @@ class Dash extends Component {
             birth_month: '',
             birth_year: '',
             everyBody: [],
-            filter: ''
+            filteredPeople: [],
+            select: ''
         }
 
         this.resetDisplay = this.resetDisplay.bind(this);
         this.toProfilePage = this.toProfilePage.bind(this);
         this.addButton = this.addButton.bind(this);
+        this.filterBy = this.filterBy.bind(this);
     }
 
     componentDidMount() {
@@ -50,7 +52,8 @@ class Dash extends Component {
             axios.get('/api/users')
             .then(res => {
                this.setState({
-                   everyBody: res.data
+                   everyBody: res.data,
+                   filteredPeople: res.data
                })
             })
         })
@@ -79,9 +82,25 @@ class Dash extends Component {
         })
     }
 
+    filterBy = (value) => {
+        this.setState({
+            select: value
+        })
+        let user_info = this.state.userInfo[0][value];
+
+        let filteredPeeps = this.state.everyBody.filter(el => {
+            return (
+                el[value].toLowerCase() === user_info
+            )
+        })
+        this.setState({
+            filteredPeople: filteredPeeps
+        })
+    }
+
     render() {
 
-        const allUsers = this.state.everyBody.map((el, i) => {
+        const allUsers = this.state.filteredPeople.map((el, i) => {
             return(
                 <div className='friend-card' key={el + i}>
                     <img src={el.user_image} alt="friend-pic" id='friend-pic'/>
@@ -118,7 +137,7 @@ class Dash extends Component {
                         </div>
                         <div className='select-box'>
                             <p id='sorted-by'>Sorted by</p>
-                            <select className='selector'>
+                            <select className='selector' name='sortBy' value={this.state.select} onChange={e => this.filterBy(e.target.value)} >
                                 <option value="select">Select</option>
                                 <option value="first_name">First Name</option>
                                 <option value="last_name">Last Name</option>
