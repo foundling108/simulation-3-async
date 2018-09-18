@@ -65,8 +65,10 @@ class Dash extends Component {
             return(
                 <div className='friend-card' key={el.id}>
                     <img src={el.user_image} alt="friend-pic" id='friend-pic'/>
-                    <p className='friend-name' id='friend-first-name'>{el.first_name}</p>    
-                    <p className='friend-name' id='friend-last-name'>{el.last_name}</p>
+                    <div className='friend-name' >
+                        <p id='friend-first-name'>{el.first_name}</p>    
+                        <p id='friend-last-name'>{el.last_name}</p>
+                    </div>
                     <button id='add-friend'>Add Friend</button>
                 </div>
             )

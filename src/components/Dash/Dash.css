@@ -144,15 +144,11 @@ h4 {
 }
 
 .friend-name {
+    width: 20%;
     font-weight: 700;
     font-size: 150%;
     text-align: left;
 }
-
-/* #friend-pic {
-    width: 100%;
-    height: auto;
-} */
 
 #friend-first-name {
     position: relative;
@@ -161,8 +157,7 @@ h4 {
 
 #friend-last-name {
     position: relative;
-    right: 19%;
-    top: 50%;
+    top: 35%;
 }
 
 #add-friend {
@@ -175,7 +170,7 @@ h4 {
    width: 25%;
    position: relative;
    top: 35%;
-   left: 13%;
+   left: 22%;
 }
 
 #no-rec {
