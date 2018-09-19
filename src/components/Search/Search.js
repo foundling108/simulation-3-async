@@ -12,9 +12,15 @@ class Search extends Component {
             everyBody: [],
             buttons: []
         }
+
+        this.mountToSearch = this.mountToSearch.bind(this);
     }
 
     componentDidMount() {
+        this.mountToSearch()
+    }
+
+    mountToSearch() {
         axios.get('/api/searchDisplay')
         .then(res => {
             let displayWhat = []
