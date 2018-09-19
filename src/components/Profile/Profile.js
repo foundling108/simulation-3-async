@@ -85,6 +85,10 @@ class Profile extends Component {
         let stuff = { first_name, last_name, gender, hair_color, eye_color, hobby, birth_day, birth_month, birth_year, user_id }
         axios.put(`/api/displayProfile/${user_id}`, stuff)
         .then(updated => {
+            this.setState({
+                cardFirst: this.state.first_name,
+                cardLast: this.state.last_name
+            })
             return alert('User info has been successfully updated')
         })
 

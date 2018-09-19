@@ -63,7 +63,8 @@ class Dash extends Component {
         axios.get('/api/users')
         .then(res => {
            this.setState({
-               everyBody: res.data
+               everyBody: res.data,
+               filteredPeople: res.data
            })
         })
     }
@@ -75,9 +76,6 @@ class Dash extends Component {
     addButton(x) {
         axios.post('/api/addFriend', {user_id: x})
         .then(res => {
-            this.setState({
-                everyBody: res.data
-            })
             this.resetDisplay()
         })
     }
