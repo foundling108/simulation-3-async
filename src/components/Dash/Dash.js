@@ -151,7 +151,7 @@ class Dash extends Component {
                             </select>
                         </div>
                         <div className='friends-grid'>
-                            {this.state.everyBody.length === 0 ? <p id="no-rec">No recommendations</p> :allUsers}
+                            {this.state.filteredPeople.length === 0 ? <p id="no-rec">No recommendations</p> :allUsers}
                         </div>
                     </section>
                 </section>

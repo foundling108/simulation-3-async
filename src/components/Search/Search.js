@@ -1,10 +1,37 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 import './Search.css';
 
 class Search extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            user_id: '',
+            everyBody: [],
+            buttons: []
+        }
+    }
+
+    componentDidMount() {
+        axios.get('/api/searchDisplay')
+        .then(res => {
+            console.log(res.data)
+            let displayWhat = []
+            for(let i=0; i<24; i++){
+                displayWhat.push(res.data[i])
+            }
+            let howManybuttons = Math.ceil(res.data.length / 24);
+            let buttons = [];
+            for(let i = 2; i < howManybuttons + 1; i++){
+                buttons.push(i)
+            }
+            this.setState({
+                buttons: buttons,
+                everyBody: displayWhat
+            })
+        })
     }
 
 
@@ -13,16 +40,8 @@ class Search extends Component {
             <section className='search-page'>
                 <div className='search-search'>
                     <select name="filter-by" id="search-filter">
-                        <option value="select">Select</option>
                         <option value="first_name">First Name</option>
                         <option value="last_name">Last Name</option>
-                        <option value="gender">Gender</option>
-                        <option value="hair_color">Hair Color</option>
-                        <option value="eye_color">Eye Color</option>
-                        <option value="hobby">Hobby</option>
-                        <option value="birth_day">Birth Day</option>
-                        <option value="birth_month">Birth Month</option>
-                        <option value="birth_year">Birth Year</option>
                     </select>
                     <input id='search-input' type="text"/>
                     <button className='search-button' id='search'>Search</button>
@@ -31,50 +50,10 @@ class Search extends Component {
                 <section className='search-friends-grid'>
                     <div className='friend-card' id='search-friend-card'>
                         <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
-                        <button id='add-friend'>Add Friend</button>
-                    </div>
-                    <div className='friend-card' id='search-friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
-                        <button id='add-friend'>Add Friend</button>
-                    </div>
-                    <div className='friend-card' id='search-friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
-                        <button id='add-friend'>Add Friend</button>
-                    </div>
-                    <div className='friend-card' id='search-friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
-                        <button id='add-friend'>Add Friend</button>
-                    </div>
-                    <div className='friend-card' id='search-friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
-                        <button id='add-friend'>Add Friend</button>
-                    </div>
-                    <div className='friend-card' id='search-friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
-                        <button id='add-friend'>Add Friend</button>
-                    </div>
-                    <div className='friend-card' id='search-friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
-                        <button id='add-friend'>Add Friend</button>
-                    </div>
-                    <div className='friend-card' id='search-friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <p className='friend-name' id='friend-first-name'>Friend's</p>    
-                        <p className='friend-name' id='friend-last-name'>Name</p>
+                        <div className='friend-name'>
+                            <p id='friend-first-search'>Friend's</p>    
+                            <p id='friend-last-search'>Name</p>
+                        </div>
                         <button id='add-friend'>Add Friend</button>
                     </div>
                 </section>

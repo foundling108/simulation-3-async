@@ -73,6 +73,16 @@
     margin: 0 25px 25px 0;
 }
 
+#friend-first-search {
+    position: relative;
+    top: 30%;
+}
+
+#friend-last-search {
+    position: relative;
+    top: 35%;
+}
+
 .page-bar {
     position: relative;
     bottom: -1%;
