@@ -45,5 +45,29 @@ module.exports = {
             res.status(200).send(added)
         })
         .catch(err => console.log(err))
+    },
+
+    getOtherUsers: (req, res) => {
+        const db = req.app.get('db');
+        const { user_id } = req.session.user;
+
+        db.users.get_all_users([ user_id ])
+        .then(allUsers => {
+            db.users.get_everybody([ user_id ])
+            .then(notYetFriends => {
+                for(let i=0; i<allUsers.length; i++){
+                    for(let j=0; j<notYetFriends.length; j++){
+                        allUsers[i].isFriend = false;
+                        if(allUsers[i].user_id == notYetFriends[j].user_id){
+                            allUsers[i].isFriend = true;
+                            break;
+                        }
+                    }
+                }
+                res.send(allUsers)
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
     }
 }

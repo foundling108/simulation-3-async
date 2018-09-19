@@ -17,14 +17,13 @@ class Search extends Component {
     componentDidMount() {
         axios.get('/api/searchDisplay')
         .then(res => {
-            console.log(res.data)
             let displayWhat = []
             for(let i=0; i<24; i++){
                 displayWhat.push(res.data[i])
             }
             let howManybuttons = Math.ceil(res.data.length / 24);
             let buttons = [];
-            for(let i = 2; i < howManybuttons + 1; i++){
+            for(let i = 0; i < howManybuttons + 1; i++){
                 buttons.push(i)
             }
             this.setState({
@@ -36,6 +35,25 @@ class Search extends Component {
 
 
     render() {
+
+        const otherUsers = this.state.everyBody.map((el, i) => {
+            return(
+                <div className='friend-card' id='search-friend-card' key={el + i}>
+                    <img src={el.user_image} alt="friend-pic"/>
+                    <div className='friend-name'>
+                        <p id='friend-first-search'>{el.first_name}</p>    
+                        <p id='friend-last-search'>{el.last_name}</p>
+                    </div>
+                    { el.isFriend === true 
+                        ?
+                        <button id='add-friend'>Add Friend</button>
+                        :
+                        <button id='remove-friend'>Remove Friend</button>
+                    }
+                </div>
+            )
+        })
+
         return(
             <section className='search-page'>
                 <div className='search-search'>
@@ -48,14 +66,7 @@ class Search extends Component {
                     <button className='search-button' id='reset'>Reset</button>
                 </div>
                 <section className='search-friends-grid'>
-                    <div className='friend-card' id='search-friend-card'>
-                        <img src="https://robohash.org/autdoloresaspernatur.bmp?size=125x123" alt="friend-pic"/>
-                        <div className='friend-name'>
-                            <p id='friend-first-search'>Friend's</p>    
-                            <p id='friend-last-search'>Name</p>
-                        </div>
-                        <button id='add-friend'>Add Friend</button>
-                    </div>
+                    {otherUsers}
                 </section>
                 <div className='page-bar'>
                     <button className='page-buttons'>1</button>
