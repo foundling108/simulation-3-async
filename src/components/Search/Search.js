@@ -36,7 +36,7 @@ class Search extends Component {
             }
             let howManybuttons = Math.ceil(res.data.length / 24);
             let buttons = [];
-            for(let i = 0; i < howManybuttons + 1; i++){
+            for(let i = 0; i < howManybuttons; i++){
                 buttons.push(i)
             }
             this.setState({
@@ -64,7 +64,7 @@ class Search extends Component {
     pagination(x) {
         console.log('1111', x)
         let pageArray = [];
-        for(let i=((x - 1)*8); i<(x*8); i++){
+        for(let i=((x - 1)*24); i<(x*24); i++){
             if(i<this.state.allInfo.length){
             pageArray.push(this.state.allInfo[i]);
             }
@@ -75,12 +75,14 @@ class Search extends Component {
     }
 
 
+
+
     render() {
 
         const pages = this.state.buttons.map((el, i) => {
             return(
                 <div className='page-buttons' key={el + i}>
-                    <button>1</button>
+                    <button>{el + 1}</button>
                 </div>
             )
         })
