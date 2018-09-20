@@ -9,11 +9,18 @@ class Search extends Component {
 
         this.state = {
             user_id: '',
+            first_name: '',
+            last_name: '',
+            searchBy: 'first_name',
+            whichPage: '',
+            allInfo: [],
             everyBody: [],
             buttons: []
         }
 
         this.mountToSearch = this.mountToSearch.bind(this);
+        this.addButton = this.addButton.bind(this);
+        this.removeButton = this.removeButton.bind(this);
     }
 
     componentDidMount() {
@@ -33,14 +40,50 @@ class Search extends Component {
                 buttons.push(i)
             }
             this.setState({
-                buttons: buttons,
-                everyBody: displayWhat
+                allInfo: res.data,
+                everyBody: displayWhat,
+                buttons: buttons
             })
+        })
+    }
+
+    addButton(x) {
+        axios.post('/api/addFriend', {user_id: x})
+        .then(res => {
+            this.mountToSearch()
+        })
+    }
+
+    removeButton(x) {
+        axios.post('/api/removeFriend', {user_id: x})
+        .then(res => {
+            this.mountToSearch()
+        })
+    }
+
+    pagination(x) {
+        console.log('1111', x)
+        let pageArray = [];
+        for(let i=((x - 1)*8); i<(x*8); i++){
+            if(i<this.state.allInfo.length){
+            pageArray.push(this.state.allInfo[i]);
+            }
+        }
+        this.setState({
+            everyBody: pageArray
         })
     }
 
 
     render() {
+
+        const pages = this.state.buttons.map((el, i) => {
+            return(
+                <div className='page-buttons' key={el + i}>
+                    <button>1</button>
+                </div>
+            )
+        })
 
         const otherUsers = this.state.everyBody.map((el, i) => {
             return(
@@ -52,9 +95,9 @@ class Search extends Component {
                     </div>
                     { el.isFriend === true 
                         ?
-                        <button id='add-friend'>Add Friend</button>
+                        <button id='add-friend'onClick={() => {this.addButton(el.user_id)}}>Add Friend</button>
                         :
-                        <button id='remove-friend'>Remove Friend</button>
+                        <button id='remove-friend'onClick={() => {this.removeButton(el.user_id)}}>Remove Friend</button>
                     }
                 </div>
             )
@@ -75,9 +118,7 @@ class Search extends Component {
                     {otherUsers}
                 </section>
                 <div className='page-bar'>
-                    <button className='page-buttons'>1</button>
-                    <button className='page-buttons'>2</button>
-                    <button className='page-buttons'>3</button>
+                    {pages}
                 </div>
             </section>
         )

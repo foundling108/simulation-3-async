@@ -47,6 +47,18 @@ module.exports = {
         .catch(err => console.log(err))
     },
 
+    removeFriend: (req, res) => {
+        const db = req.app.get('db');
+        const { user_id } = req.session.user;
+        console.log(req.body)
+
+        db.friends.remove_friend([user_id, req.body.user_id])
+        .then(added => {
+            res.status(200).send(added)
+        })
+        .catch(err => console.log(err))
+    },
+
     getOtherUsers: (req, res) => {
         const db = req.app.get('db');
         const { user_id } = req.session.user;

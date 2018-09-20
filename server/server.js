@@ -79,7 +79,6 @@ app.get('/auth/callback', async (req, res) => {
 
 // Authorization controller
 app.get('/api/getUser', auth_controller.getUser);
-
 app.post('/auth/logout', auth_controller.logout);
 
 // Friend controller
@@ -92,5 +91,6 @@ app.put('/api/displayProfile/:id', user_controller.displayProfile);
 // Recommended controller
 app.get('/api/users', user_controller.mountRec);
 app.post('/api/addFriend', user_controller.addFriend);
+app.post('/api/removeFriend', user_controller.removeFriend);
 
 app.listen( SERVER_PORT, () => { console.log(`Listening on port ${SERVER_PORT}.`); } )
