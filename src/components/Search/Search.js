@@ -15,12 +15,14 @@ class Search extends Component {
             whichPage: '',
             allInfo: [],
             everyBody: [],
-            buttons: []
+            buttons: [],
+            clicked: false
         }
 
         this.mountToSearch = this.mountToSearch.bind(this);
         this.addButton = this.addButton.bind(this);
         this.removeButton = this.removeButton.bind(this);
+        this.pagination = this.pagination.bind(this);
     }
 
     componentDidMount() {
@@ -30,18 +32,23 @@ class Search extends Component {
     mountToSearch() {
         axios.get('/api/searchDisplay')
         .then(res => {
-            let displayWhat = []
-            for(let i=0; i<24; i++){
-                displayWhat.push(res.data[i])
-            }
+            this.howManyButtons()
+            this.setState({
+                allInfo: res.data,
+                everyBody: res.data
+            })
+        })
+    }
+
+    howManyButtons() {
+        axios.get('/api/getAllUsers')
+        .then(res => {
             let howManybuttons = Math.ceil(res.data.length / 24);
             let buttons = [];
             for(let i = 0; i < howManybuttons; i++){
                 buttons.push(i)
             }
             this.setState({
-                allInfo: res.data,
-                everyBody: displayWhat,
                 buttons: buttons
             })
         })
@@ -62,7 +69,6 @@ class Search extends Component {
     }
 
     pagination(x) {
-        console.log('1111', x)
         let pageArray = [];
         for(let i=((x - 1)*24); i<(x*24); i++){
             if(i<this.state.allInfo.length){
@@ -76,13 +82,12 @@ class Search extends Component {
 
 
 
-
     render() {
 
         const pages = this.state.buttons.map((el, i) => {
             return(
                 <div className='page-buttons' key={el + i}>
-                    <button>{el + 1}</button>
+                    <button id='page-num' onClick={() => {this.pagination(el + 1)}}>{el+1}</button>
                 </div>
             )
         })

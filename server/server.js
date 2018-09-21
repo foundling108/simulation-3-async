@@ -82,6 +82,7 @@ app.get('/api/getUser', auth_controller.getUser);
 app.post('/auth/logout', auth_controller.logout);
 
 // Friend controller
+app.get('/api/getAllUsers' , user_controller.getAllUsers);
 app.get('/api/searchDisplay' , user_controller.getOtherUsers);
 
 // User controller
