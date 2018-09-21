@@ -11,7 +11,8 @@ class Search extends Component {
             user_id: '',
             first_name: '',
             last_name: '',
-            searchBy: 'first_name',
+            select: 'first_name',
+            searchBy: '',
             whichPage: '',
             allInfo: [],
             everyBody: [],
@@ -23,6 +24,10 @@ class Search extends Component {
         this.addButton = this.addButton.bind(this);
         this.removeButton = this.removeButton.bind(this);
         this.pagination = this.pagination.bind(this);
+        this.inputValue = this.inputValue.bind(this);
+        this.selectValue = this.selectValue.bind(this);
+        this.searchButton = this.searchButton.bind(this);
+        this.resetButton = this.resetButton.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +59,19 @@ class Search extends Component {
         })
     }
 
+    pagination(x) {
+        let pageArray = [];
+        for(let i=((x - 1)*24); i<(x*24); i++){
+            if(i<this.state.allInfo.length){
+            pageArray.push(this.state.allInfo[i]);
+            }
+        }
+        this.setState({
+            everyBody: pageArray,
+            clicked: true
+        })
+    }
+
     addButton(x) {
         axios.post('/api/addFriend', {user_id: x})
         .then(res => {
@@ -68,19 +86,46 @@ class Search extends Component {
         })
     }
 
-    pagination(x) {
-        let pageArray = [];
-        for(let i=((x - 1)*24); i<(x*24); i++){
-            if(i<this.state.allInfo.length){
-            pageArray.push(this.state.allInfo[i]);
-            }
-        }
+    inputValue(x){
         this.setState({
-            everyBody: pageArray
+            searchBy: x
         })
     }
 
+    selectValue(x){
+        this.setState({
+            select: x
+        })
+    }
 
+    resetButton(){
+        this.mountToSearch()
+    }
+
+    searchButton() {
+        const { searchBy, select, allInfo } = this.state
+        let filteredInfo = []
+        if( searchBy === '' ){
+            return
+        } else if( select === 'first_name'){
+            for( let i=0; i<allInfo.length; i++ ){
+                if(allInfo[i].first_name === searchBy){
+                    console.log( '11111', allInfo[i].first_name, searchBy )
+                    filteredInfo.push(allInfo[i])
+                    console.log(filteredInfo)
+                }
+            }
+        } else if( select === 'last_name'){
+            for( let i=0; i<allInfo.length; i++ ){
+                if(allInfo[i].last_name === searchBy){
+                    filteredInfo.push(allInfo[i])
+                }
+            }
+        }
+        this.setState({
+            everyBody: filteredInfo
+        })
+    }
 
     render() {
 
@@ -88,6 +133,14 @@ class Search extends Component {
             return(
                 <div className='page-buttons' key={el + i}>
                     <button id='page-num' onClick={() => {this.pagination(el + 1)}}>{el+1}</button>
+                </div>
+            )
+        })
+
+        const clickedPages = this.state.buttons.map((el, i) => {
+            return(
+                <div className='page-buttons' id='page-buttons-clicked' key={el + i}>
+                    <button id='page-num-clicked' onClick={() => {this.pagination(el + 1)}}>Page {el+1}</button>
                 </div>
             )
         })
@@ -113,19 +166,25 @@ class Search extends Component {
         return(
             <section className='search-page'>
                 <div className='search-search'>
-                    <select name="filter-by" id="search-filter">
+                    <select name="filter-by" id="search-filter" onChange={e => this.selectValue(e.target.value)}>
                         <option value="first_name">First Name</option>
                         <option value="last_name">Last Name</option>
                     </select>
-                    <input id='search-input' type="text"/>
-                    <button className='search-button' id='search'>Search</button>
-                    <button className='search-button' id='reset'>Reset</button>
+                    <input id='search-input' type="text" onChange={e => this.inputValue(e.target.value)}/>
+                    <button className='search-button' id='search'onClick={this.searchButton}>Search</button>
+                    <button className='search-button' id='reset' onClick={this.resetButton}>Reset</button>
                 </div>
                 <section className='search-friends-grid'>
                     {otherUsers}
                 </section>
                 <div className='page-bar'>
-                    {pages}
+                    {
+                        this.state.clicked === false
+                        ?
+                        pages
+                        :
+                        clickedPages
+                    }
                 </div>
             </section>
         )

@@ -126,8 +126,16 @@
     width: 100%; 
 }
 
+#page-buttons-clicked {
+    margin-right: 5%;
+}
+
 #page-num-clicked {
+    border: none;
     background-color: black;
-    color: #ffffff
+    color: #ffffff;
+    width: 250%;
+    height: 100%;
+
 }
 
